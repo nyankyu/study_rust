@@ -8,4 +8,10 @@ fn main() {
 
     println!("hoge {}", -1234i32);
 
+    let float_32: f32 = -42.001;
+    println!("float32: {}", float_32);
+
+    let flag = true;
+    let f: bool = flag;
+    println!("flag: {}", f);
 }
