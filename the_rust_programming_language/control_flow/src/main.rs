@@ -16,4 +16,23 @@ fn main() {
         println!("number is greater then 4");
     }
 
+    /*
+    loop {
+        println!("again!");
+    }
+    */
+    let mut count = 10;
+    while count != 0 {
+        println!("{}", count);
+        count = count - 1;
+    }
+
+    let array = [10, 20, 30, 40, 50];
+    for elem in array.iter() {
+        println!("the value is: {}", elem);
+    }
+
+    for n in (1..5).rev() {
+        println!("{}", n);
+    }
 }
