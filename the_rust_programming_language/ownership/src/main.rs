@@ -14,4 +14,18 @@ fn main() {
     let s2 = s1.clone();
     println!("s1: [{}]", s1);
     println!("s2: [{}]", s2);
+
+    takes_ownership(s1);
+    //println!("{}", s1);
+
+    make_copy(x);
+    println!("{}", x);
+}
+
+fn takes_ownership(some_string: String) {
+    println!("{}", some_string);
+}
+
+fn make_copy(some_integer: i32) {
+    println!("{}", some_integer);
 }
