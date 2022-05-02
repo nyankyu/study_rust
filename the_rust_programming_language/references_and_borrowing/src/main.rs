@@ -10,10 +10,16 @@ fn main() {
     let r2 = &a;
     let r3 = &mut a;
     //println!("{}", r1);
+
+    let reference_to_nothing = dangle();
 }
 
 fn calculate_length(s1: &mut String, s2: &mut String) -> usize {
     s1.push_str(", world!");
     s2.push_str(", world!");
     s1.len() + s2.len()
+}
+
+fn dangle() -> String {
+    String::from("hoge")
 }
