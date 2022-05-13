@@ -31,4 +31,11 @@ fn main() {
     msg1.call();
     msg2.call();
     msg3.call();
+
+    let some_num = Some(32);
+    let some_string = Some(String::from("some"));
+    let hoge: Option<i32> = None;
+    println!("{:?}", some_num);
+    println!("{:?}", some_string.unwrap());
+    println!("{:?}", hoge.expect("print optional value hoge"));
 }
