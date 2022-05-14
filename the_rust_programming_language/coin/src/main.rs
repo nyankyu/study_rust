@@ -49,4 +49,16 @@ fn main() {
         7 => println!("{} is Favorite Number!", number),
         _ => println!("{} is NOT Favorite Number!", number),
     }
+
+    //let some_u8_value = None;
+    let some_u8_value = Some(5u8);
+    match some_u8_value {
+        Some(3) => println!("three"),
+        _ => (),
+    }
+    if let Some(i) = some_u8_value {
+        println!("value is {}", i);
+    } else {
+        println!("None");
+    }
 }
