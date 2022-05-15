@@ -1,7 +1,7 @@
 mod front_of_house {
     pub mod hosting {
         pub fn add_to_waitlist() {}
-        fn seat_at_table() {}
+        pub fn seat_at_table() {}
     }
 
     pub mod serving {
@@ -39,14 +39,26 @@ mod back_of_house {
     }
 }
 
-pub fn eat_at_restaurant() {
-    crate::front_of_house::hosting::add_to_waitlist();
-    front_of_house::hosting::add_to_waitlist();
+use crate::front_of_house::hosting;
+use self::front_of_house::hosting::seat_at_table;
 
-    let mut meal = back_of_house::Breakfast::summer("Rye");
+pub fn eat_at_restaurant() {
+    hosting::add_to_waitlist();
+    hosting::add_to_waitlist();
+    seat_at_table();
+
+    use back_of_house::Breakfast;
+
+    let mut meal = Breakfast::summer("Rye");
     meal.toast = String::from("Wheat");
     println!("I'd like {} toast please.", meal.toast);
 
     let order1 = back_of_house::Appetizer::Soup;
     let order2 = back_of_house::Appetizer::Salad;
 }
+
+use std::fmt::Result;
+use std::io::Result as IoResult;
+
+fn function1() -> Result {}
+fn function2() -> IoResult {}
