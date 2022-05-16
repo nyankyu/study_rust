@@ -10,4 +10,9 @@ fn main() {
         Some(value) => println!("The third element is {}", value),
         None => println!("There is no third element."),
     }
+
+    for i in &mut v {
+        *i *= 10;
+    }
+    println!("{:?}", v);
 }
