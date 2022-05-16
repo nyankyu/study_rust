@@ -15,4 +15,22 @@ fn main() {
         *i *= 10;
     }
     println!("{:?}", v);
+
+    #[derive(Debug)]
+    enum SpreadsheetCell {
+        Int(i32),
+        Float(f64),
+        Text(String),
+    }
+
+    let row = vec![
+        SpreadsheetCell::Int(42),
+        SpreadsheetCell::Float(12.345),
+        SpreadsheetCell::Text(String::from("hoge")),
+    ];
+    println!("{:?}", row);
+
+    let mut vv: Vec<i32> = Vec::with_capacity(5);
+    vv.resize(5, 1);
+    println!("{:?}", vv);
 }
