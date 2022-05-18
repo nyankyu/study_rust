@@ -1,5 +1,7 @@
 fn main() {
-    let mut s = String::new();
+    let s = "hoge".to_string();
+    let ss = String::from("🍻");
 
     println!("{}", s);
+    println!("{}", ss);
 }
