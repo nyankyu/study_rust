@@ -32,4 +32,19 @@ fn main() {
     for (key, value) in &scores {
         println!("{}: {}", key, value);
     }
+
+    scores.insert(String::from("Yellow"), 20);
+    println!("{:?}", scores);
+
+    scores.entry(String::from("White")).or_insert(60);
+    scores.entry(String::from("Blue")).or_insert(300);
+    println!("{:?}", scores);
+
+    let text = "hello world wonderful world";
+    let mut char_map = HashMap::new();
+    for c in text.chars() {
+        let count = char_map.entry(c).or_insert(0);
+        *count += 1;
+    }
+    println!("{:?}", char_map);
 }
