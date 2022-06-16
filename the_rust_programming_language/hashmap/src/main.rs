@@ -1,5 +1,5 @@
 use std::collections::HashMap;
-use rand::{thread_rng, Rng};
+use rand::{thread_rng, Rng, distributions::Uniform};
 
 fn main() {
     /*
@@ -52,33 +52,35 @@ fn main() {
 
     println!("=======================");
     */
-    let mut list = [0i8; 64];
-    thread_rng().fill(&mut list);
-    //println!("{:?}", list);
 
-    let (mean, median, mode) = make_mean_median_mode(&list);
-    println!("mean:\t{}", mean);
-    println!("median:\t{}", median);
-    println!("mode:\t{}", mode);
+
+    let distr = Uniform::from(-50..50);
+    let list: Vec<i32> = thread_rng().sample_iter(distr).take(100).collect();
+    println!("{:?}", list);
+
+    println!("mean:\t{}", mean(&list));
+    println!("median:\t{}", median(&list));
+    println!("mode:\t{}", mode(&list));
 }
 
-fn make_mean_median_mode(list: &[i8]) -> (f32, i8, i8) {
-    let mut v = Vec::from(list);
-    let half_len = v.len() / 2;
-    v.sort();
-    println!("{:?}", v);
+fn mean(list: &Vec<i32>) -> f32 {
+    let sum: i32 = list.iter().sum();
+    sum as f32 / list.len() as f32
+}
 
-    let mut sum: i32 = 0;
-    let mut h = HashMap::new();
-    for i in &v {
-        let count = h.entry(i).or_insert(0);
+fn median(list: &Vec<i32>) -> i32 {
+    let mut list_ = list.to_vec();
+    list_.sort();
+    //println!("{:?}", list_);
+    let half_len = list_.len() / 2;
+    list_[half_len]
+}
+
+fn mode(list: &Vec<i32>) -> i32 {
+    let mut frequency = HashMap::new();
+    for i in list {
+        let count = frequency.entry(i).or_insert(0);
         *count += 1;
-        sum += *i as i32;
     }
-
-    (
-        sum as f32 / list.len() as f32,
-        *(v.get(half_len).unwrap()),
-        **(h.iter().max_by(|a, b| a.1.cmp(b.1)).unwrap().0)
-    )
+    **(frequency.iter().max_by(|a, b| a.1.cmp(b.1)).unwrap().0)
 }
