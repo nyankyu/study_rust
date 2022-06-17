@@ -1,5 +1,5 @@
+use rand::{distributions::Uniform, thread_rng, Rng};
 use std::collections::HashMap;
-use rand::{thread_rng, Rng, distributions::Uniform};
 
 fn main() {
     /*
@@ -53,7 +53,6 @@ fn main() {
     println!("=======================");
     */
 
-
     let distr = Uniform::from(-50..50);
     let list: Vec<i32> = thread_rng().sample_iter(distr).take(100).collect();
     println!("{:?}", list);
@@ -70,7 +69,7 @@ fn mean(list: &Vec<i32>) -> f32 {
 
 fn median(list: &Vec<i32>) -> i32 {
     let mut list_ = list.to_vec();
-    list_.sort();
+    list_.sort_unstable();
     //println!("{:?}", list_);
     let half_len = list_.len() / 2;
     list_[half_len]
