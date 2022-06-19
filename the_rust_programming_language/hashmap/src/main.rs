@@ -60,14 +60,23 @@ fn main() {
     println!("mean:\t{}", mean(&list));
     println!("median:\t{}", median(&list));
     println!("mode:\t{}", mode(&list));
+
+    println!("{}", pig_latin(&String::from("ahoge")));
+    println!("{}", pig_latin(&String::from("hoge")));
+    println!("{}", pig_latin(&String::from("apple")));
+    println!("{}", pig_latin(&String::from("first")));
+    println!("{}", pig_latin(&String::from("bbbaiueo")));
+    println!("{}", pig_latin(&String::from("")));
+    println!("{}", pig_latin(&String::from("a")));
+    println!("{}", pig_latin(&String::from("b")));
 }
 
-fn mean(list: &Vec<i32>) -> f32 {
+fn mean(list: &[i32]) -> f32 {
     let sum: i32 = list.iter().sum();
     sum as f32 / list.len() as f32
 }
 
-fn median(list: &Vec<i32>) -> i32 {
+fn median(list: &[i32]) -> i32 {
     let mut list_ = list.to_vec();
     list_.sort_unstable();
     //println!("{:?}", list_);
@@ -75,11 +84,25 @@ fn median(list: &Vec<i32>) -> i32 {
     list_[half_len]
 }
 
-fn mode(list: &Vec<i32>) -> i32 {
+fn mode(list: &[i32]) -> i32 {
     let mut frequency = HashMap::new();
-    for i in list {
+    for &i in list {
         let count = frequency.entry(i).or_insert(0);
         *count += 1;
     }
-    **(frequency.iter().max_by(|a, b| a.1.cmp(b.1)).unwrap().0)
+    frequency
+        .into_iter()
+        .max_by_key(|&(_, count)| count)
+        .expect("msg").0
+}
+
+fn pig_latin(word: &String) -> String {
+    let i = word.find(&['a', 'i', 'u', 'e', 'o']);
+    match i {
+        None => format!("{}ay", word),
+        Some(n) => {
+            let (consonant, remnant) = word.split_at(n);
+            format!("{}{}ay", remnant, consonant)
+        },
+    }
 }
