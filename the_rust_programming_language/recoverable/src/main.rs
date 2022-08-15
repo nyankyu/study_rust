@@ -1,12 +1,8 @@
-use std::f32::consts::E;
 use std::io;
-use std::io::Read;
-use std::fs::File;
+use std::fs;
 
 fn read_username_from_file() -> Result<String, io::Error> {
-    let mut username = String::new();
-    File::open("userlist.txt")?.read_to_string(&mut username)?;
-    Ok(username)
+    fs::read_to_string("userlist.txt")
 }
 
 fn main() {
