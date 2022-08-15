@@ -6,6 +6,5 @@ fn read_username_from_file() -> Result<String, io::Error> {
 }
 
 fn main() {
-    let username = read_username_from_file().expect("fialed read userlist file.");
-    print!("{}", username);
+    print!("{}", read_username_from_file()?);
 }
