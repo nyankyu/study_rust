@@ -1,19 +1,13 @@
 fn main() {
-    let number_list = vec![34, 50, 25, 100, 65];
-    println!("list is {:?}", number_list);
-    println!("The largest number is {}", largest(&number_list));
-
-    let number_list = vec!['a', 'i', 'u', 'e', 'o'];
-    println!("list is {:?}", number_list);
-    println!("The largest number is {}", largest(&number_list));
+    let point = Point {x: 5, y: 10};
+    println!("point is [x: {}, y: {}]", point.x, point.y);
+    let point = Point {x: 1.0, y: -4.5};
+    println!("point is [x: {}, y: {}]", point.x, point.y);
+    let point = Point {x: 10, y: -4.5};
+    println!("point is [x: {}, y: {}]", point.x, point.y);
 }
 
-fn largest<T>(list: &[T]) -> T {
-    let mut largest = list[0];
-    for &item in list.iter() {
-        if item > largest {
-            largest = item;
-        }
-    }
-    largest
+struct Point<T, U> {
+    x: T,
+    y: U,
 }
